@@ -33,22 +33,25 @@ int32 dApp::main_thread(void *parameter)
 	BDirectory app_root;
 	tEnt.GetParent(&app_root);
 
-	// an out of tree build puts the binary in build/, with data/ one level up
+	BPath app_path;
+	tEnt.GetPath(&app_path);
+	app_path.GetParent(&app_path);
+
+	// an out of tree build keeps the binary in build/, with data/ one level up
 	BEntry data_entry;
 	if (app_root.FindEntry("data", &data_entry) != B_OK)
 	{
-		BPath parent;
-		if (app_root.GetPath(&parent) == B_OK
-			&& parent.GetParent(&parent) == B_OK)
+		BPath up(app_path);
+		if (up.GetParent(&up) == B_OK)
 		{
-			BDirectory up(parent.Path());
-			if (up.FindEntry("data", &data_entry) == B_OK)
-				app_root.SetTo(parent.Path());
+			BDirectory up_dir(up.Path());
+			if (up_dir.FindEntry("data", &data_entry) == B_OK)
+			{
+				app_root.SetTo(up.Path());
+				app_path = up;
+			}
 		}
 	}
-
-	BPath app_path;
-	app_root.GetPath(&app_path);
 
 // –––––––––––––––––––––––––––––––––
 
