@@ -5,3 +5,4 @@ backslash n (x86)*
 *.d
 *.so
 *.o
+build/

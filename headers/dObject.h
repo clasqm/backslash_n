@@ -13,9 +13,9 @@ public:
 	virtual ~dObject();
 	virtual dObject *Clone();
 
-	bool Load(BDirectory *dir,char *filename);
-	bool LoadPoints(BDirectory *dir,char *filename);
-	bool LoadLines(BDirectory *dir,char *filename);
+	bool Load(BDirectory *dir,const char *filename);
+	bool LoadPoints(BDirectory *dir,const char *filename);
+	bool LoadLines(BDirectory *dir,const char *filename);
 
 //	void New(uint32 num_vectors,vertex_struct *vertex_list,uint32 num_faces,face_struct *face_list);
 	void WrapTexture();

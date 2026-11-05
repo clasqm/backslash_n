@@ -1,5 +1,6 @@
 #include "dBitmap.h"
 
+#include <stdio.h>
 #include <stdlib.h>
 #include <Directory.h>
 #include <File.h>

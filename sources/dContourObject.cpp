@@ -7,6 +7,7 @@
 #include "dDot.h"
 #include "dVertex.h"
 
+#include <stdio.h>
 #include <string.h>
 #include <math.h>
 
@@ -106,7 +107,7 @@ _EXPORT dContourObject::~dContourObject()
 {
 }
 
-bool dContourObject::Load(BDirectory *dir,char *filename)
+bool dContourObject::Load(BDirectory *dir,const char *filename)
 {
 // init the position
 	MoveTo(0.0,0.0,0.0);

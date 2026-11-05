@@ -1,8 +1,12 @@
 #include <Application.h>
 #include <Directory.h>
+#include <Entry.h>
+#include <File.h>
 #include <Path.h>
 #include <Alert.h>
+#include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include <StorageDefs.h>
 
 #include <Roster.h>
@@ -28,9 +32,23 @@ int32 dApp::main_thread(void *parameter)
 	BEntry tEnt(&theInfo.ref);
 	BDirectory app_root;
 	tEnt.GetParent(&app_root);
+
+	// an out of tree build puts the binary in build/, with data/ one level up
+	BEntry data_entry;
+	if (app_root.FindEntry("data", &data_entry) != B_OK)
+	{
+		BPath parent;
+		if (app_root.GetPath(&parent) == B_OK
+			&& parent.GetParent(&parent) == B_OK)
+		{
+			BDirectory up(parent.Path());
+			if (up.FindEntry("data", &data_entry) == B_OK)
+				app_root.SetTo(parent.Path());
+		}
+	}
+
 	BPath app_path;
-	tEnt.GetPath(&app_path);
-	app_path.GetParent(&app_path);
+	app_root.GetPath(&app_path);
 
 // –––––––––––––––––––––––––––––––––
 
@@ -194,20 +212,10 @@ int32 dApp::main_thread(void *parameter)
 
 	uint32 *list = new uint32[640*400]; 
 	BFile list_file(&app_root,"data/table-zoom2.raw",B_READ_ONLY);
-	list_file.Read(list,640*400*4);
-	
-#ifndef __INTEL__
-	for(int32 i=0;i<640*400;i++)
-	{
-		uint8 *ptr=(uint8*)list;
-		uint8 tmp = ptr[i*4];
-		ptr[i*4] = ptr[i*4+3];
-		ptr[i*4+3] = tmp;
-		tmp = ptr[i*4+1];
-		ptr[i*4+1] = ptr[i*4+2];
-		ptr[i*3+2] = tmp;
-	}
-#endif
+	if (list_file.InitCheck() == B_OK)
+		list_file.Read(list,640*400*4);
+	else
+		memset(list,0,640*400*4);
 
 // –––––––––––––––––––––––––––––––––
 

@@ -5,6 +5,9 @@
 #include "string.h"
 #include "types.h"
 
+class Player;
+class InsPly;
+
 // välj vad som skall kompileras
 #define TARGET_EDITOR
 
@@ -177,6 +180,7 @@ private:
 	status_t init;	
 
 	// player
+	uint32 smp_left;		// samples left of the current PAL screen
 	uint32 PALs;
 	float tmp;
 	int pal;

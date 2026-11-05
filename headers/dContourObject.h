@@ -15,7 +15,7 @@ public:
 	virtual ~dContourObject();
 	virtual dObject *Clone();
 
-	bool Load(BDirectory *dir,char *filename);
+	bool Load(BDirectory *dir,const char *filename);
 
 	virtual void Project();
 

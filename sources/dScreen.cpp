@@ -2,6 +2,7 @@
 #include <View.h>
 #include <Window.h>
 #include <Bitmap.h>
+#include <stdio.h>
 
 #include "dScreen.h"
 

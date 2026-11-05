@@ -1,7 +1,7 @@
 #ifndef _dSCREEN_
 #define _dSCREEN_
 
-#include <WindowScreen.h>
+#include <Screen.h>
 #include <OS.h>
 #include <Screen.h>
 #include "dColor.h"

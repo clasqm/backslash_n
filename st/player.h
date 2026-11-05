@@ -9,6 +9,7 @@ class Player
 {
 public:
 	Player(Song *s, uint8 chno);
+	~Player();
 
 	void	PAL();
 	float	Next();
@@ -34,7 +35,8 @@ private:
 	float ampstep;	
 
 	float freq;
-	float freqstep;	
+	float freqstep;
+	float targetfreq;	
 
 	float cutoff;
 	float cutoffstep;	

@@ -189,13 +189,8 @@ inline void dBitmap::DrawSubPixelPoints(dObject *obj,dClut2 *clut)
 
 inline void dBitmap::Empty()
 {
-#ifdef __INTEL__
 	uint32 *frame = (uint32*)buffer;
 	uint32 *frame_stop = (uint32*)(buffer + Width() * Height());
-#else
-	double *frame = (double*)buffer;
-	double *frame_stop = (double*)(buffer + Width() * Height());
-#endif
 
 	while(frame<frame_stop)
 	{

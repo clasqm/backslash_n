@@ -6,6 +6,7 @@
 #include "dDot.h"
 #include "dVertex.h"
 
+#include <stdio.h>
 #include <string.h>
 #include <math.h>
 
@@ -115,7 +116,7 @@ _EXPORT dObject::~dObject()
 	if (rotated_vertices) delete []rotated_vertices;
 }
 
-bool dObject::LoadLines(BDirectory *dir,char *filename)
+bool dObject::LoadLines(BDirectory *dir,const char *filename)
 {
 // init the position
 	MoveTo(0.0,0.0,0.0);
@@ -260,7 +261,7 @@ bool dObject::LoadLines(BDirectory *dir,char *filename)
 }
 
 
-bool dObject::Load(BDirectory *dir,char *filename)
+bool dObject::Load(BDirectory *dir,const char *filename)
 {
 // init the position
 	MoveTo(0.0,0.0,0.0);
@@ -384,7 +385,7 @@ bool dObject::Load(BDirectory *dir,char *filename)
 	return true;
 }
 
-bool dObject::LoadPoints(BDirectory *dir,char *filename)
+bool dObject::LoadPoints(BDirectory *dir,const char *filename)
 {
 // init the position
 	MoveTo(0.0,0.0,0.0);

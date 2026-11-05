@@ -44,6 +44,8 @@ private:
 	float currvaldet;
 
 	float curr;
+
+	uint32 noise;	// noise generator state (NOS)
 };
 
 #endif
